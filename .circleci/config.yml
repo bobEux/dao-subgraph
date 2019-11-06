@@ -15,6 +15,7 @@ jobs:
           name: Instal Graph CLI
           command: |
             sudo yarn global add @graphprotocol/graph-cli
+            graph -v
       - run:
           name: Install dependencies
           command: |
