@@ -10,21 +10,21 @@ jobs:
       - run:
           name: Install yarn
           command: |
-            npm install -g yarn
+            sudo npm install -g yarn
       - run:
           name: Instal Graph CLI
           command: |
-            yarn global add @graphprotocol/graph-cli
+            sudo yarn global add @graphprotocol/graph-cli
       - run:
           name: Install dependencies
           command: |
-            yarn install
-            yarn codegen
+            sudo yarn install
+            sudo yarn codegen
       - run:
           name: Deploy the subgraph
           command: |
-            graph auth https://api.thegraph.com/deploy/ $ACCESS_TOKEN
-            yarn deploy
+            sudo graph auth https://api.thegraph.com/deploy/ $ACCESS_TOKEN
+            sudo yarn deploy
       - run:
           name: Announce Deployment
           command: |
