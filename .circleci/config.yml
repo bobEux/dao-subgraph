@@ -1,0 +1,42 @@
+version: 2
+
+jobs:
+  deploy_subgraph:
+    working_directory: ~/dao-subgraph
+    docker:
+      - image: circleci/node:10.14
+    steps:
+      - checkout
+      - run:
+          name: Install yarn
+          command: |
+            npm install -g yarn
+      - run:
+          name: Instal Graph CLI
+          command: |
+            yarn global add @graphprotocol/graph-cli
+      - run:
+          name: Install dependencies
+          command: |
+            yarn install
+            yarn codegen
+      - run:
+          name: Deploy the subgraph
+          command: |
+            graph auth https://api.thegraph.com/deploy/ $ACCESS_TOKEN
+            yarn deploy
+      - run:
+          name: Announce Deployment
+          command: |
+            chmod +x .circleci/announceDeployment.sh
+            .circleci/announceDeployment.sh
+
+workflows:
+  version: 2
+  deploy_subgraph:
+    jobs:
+      - deploy-subgraph:
+          filters:
+            branches:
+              only:
+                  - master
