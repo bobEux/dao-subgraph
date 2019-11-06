@@ -8,6 +8,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install dependencies
+          command: |
+            sudo apt update
+            sudo apt install libsecret-1-dev
+      - run:
           name: Install yarn
           command: |
             sudo npm install -g yarn
@@ -17,7 +22,7 @@ jobs:
             sudo yarn global add @graphprotocol/graph-cli
             graph -v
       - run:
-          name: Install dependencies
+          name: Install yarn dependencies
           command: |
             sudo yarn install
             sudo yarn codegen
