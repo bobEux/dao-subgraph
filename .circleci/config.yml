@@ -35,7 +35,7 @@ workflows:
   version: 2
   deploy_subgraph:
     jobs:
-      - deploy-subgraph:
+      - deploy_subgraph:
           filters:
             branches:
               only:
